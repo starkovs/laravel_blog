@@ -19,7 +19,7 @@ class PostController extends Controller
     }
 
     public function show($post){
-        return 'Show a post';
+        return "Show a post {$post}";
     }
 
     public function edit($post){
