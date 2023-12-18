@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Posts\CommentController;
 use App\Http\Controllers\TestController;
@@ -7,11 +8,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::get('/test', TestController::class);
+Route::get('/test', TestController::class)->name('test')->middleware('token:secret');
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 
 // Route::get('register', RegisterControlller::class)->name;
 
-Route::prefix('user')->as('user.')->group(function () {
+Route::prefix('user')->middleware(['auth', 'active'])->as('user.')->group(function () {
     // CRUD (Create, Read, Update, Delete)
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
