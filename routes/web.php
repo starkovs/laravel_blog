@@ -10,10 +10,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home.index')->name('home');
 
-Route::get('/test', TestController::class)->name('test')->middleware('token:secret');
+Route::get('/test', 'TestController@test')->middleware('token:secret');
+
 
 Route::middleware('guest')->group(function(){
     Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store')->middleware('guest');
+
 
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
 });

@@ -3,7 +3,12 @@
 @section('page.title','Blog posts')
 
 @section('content')
-
-    <h1>Blog post</h1>
+    <a href="{{route('blog')}}">
+        back
+    </a>
+    <h2>{{$post->title}}</h2>
+    <p>
+        {{$post->text}}
+    </p>
 
 @endsection
